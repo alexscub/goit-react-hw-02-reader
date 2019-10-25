@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Controls.module.css';
 
-const Controls = ({ handle, disabled }) => (
+const Controls = ({ handle, currentPage, pages }) => (
   <section className={styles.controls}>
     <button
       type="button"
       className={styles.button}
       name="previous"
-      disabled={disabled.previous}
+      disabled={!currentPage}
       onClick={handle}
     >
       Назад
@@ -17,7 +17,7 @@ const Controls = ({ handle, disabled }) => (
       type="button"
       className={styles.button}
       name="next"
-      disabled={disabled.next}
+      disabled={currentPage + 1 === pages}
       onClick={handle}
     >
       Вперед
@@ -28,8 +28,6 @@ const Controls = ({ handle, disabled }) => (
 export default Controls;
 Controls.propTypes = {
   handle: PropTypes.func.isRequired,
-  disabled: PropTypes.shape({
-    previous: PropTypes.bool,
-    next: PropTypes.bool,
-  }).isRequired,
+  currentPage: PropTypes.number.isRequired,
+  pages: PropTypes.number.isRequired,
 };
